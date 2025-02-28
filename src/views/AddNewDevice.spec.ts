@@ -53,7 +53,7 @@ describe("AddDevice Component", () => {
       name: "Test Device",
       data: {
         capacity: "128 GB",
-        price: 100,
+        price: "100",
         category: "Smartphone",
         color: "Black",
       },

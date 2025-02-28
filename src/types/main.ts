@@ -12,7 +12,7 @@ export interface DeviceItem {
 export interface ResponseData {
   id: string;
   name: string;
-  data: Data;
+  data?: Data;
 }
 
 interface Data {

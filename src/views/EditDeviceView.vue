@@ -117,8 +117,12 @@ const handleSubmit = async () => {
     await axios.put(`/api/objects/${deviceId}`, updatedDevice).then((response) => {
         toast.success('Device updated successsfully');
         router.push("/");
-    }).catch(() => {
-        toast.error('Error Updating');
+    }).catch((error) => {
+        if (error.status === 405) {
+            toast.error('Not allowed');
+        } else {
+            toast.error('Error Updating');
+        }
     })
 };
 

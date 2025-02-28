@@ -17,7 +17,7 @@
 
                         <div class="mb-4">
                             <label class="block text-gray-700 font-bold mb-2">Price</label>
-                            <input type="number" v-model="form.price" id="price" name="price" class="input-field"
+                            <input type="text" v-model="form.price" id="price" name="price" class="input-field"
                                 placeholder="eg. 99.99" required />
                         </div>
 
@@ -85,10 +85,6 @@ const form = ref({
 });
 
 const handleSubmit = () => {
-    if (isNaN(Number(state.form.price))) {
-        toast.warning('Enter only numbers in the price field');
-        return;
-    }
     const { name, storageSize, storageUnit, ...rest } = form.value;
     const capacity = `${storageSize} ${storageUnit}`;
     const formData = {
@@ -106,8 +102,12 @@ const handleSubmit = () => {
             router.push('/');
 
         })
-        .catch(() => {
-            toast.error('Something went wrong please try adding the item again!');
+        .catch((error) => {
+            if (error.status === 405) {
+                toast.error('Not allowed');
+            } else {
+                toast.error('Something went wrong please try adding the item again!');
+            }
         });
 };
 </script>

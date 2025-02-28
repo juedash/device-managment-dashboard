@@ -28,13 +28,6 @@
             <ListView :devices="filteredItems" v-else @deleteItem="deleteItem($event)" />
         </div>
     </div>
-
-    <div v-else class="bg-white p-4 rounded-lg text-xl mx-auto my-20 text-center">
-        <h2>No items found!</h2>
-        <RouterLink to="/add-new" class="text-green-900 hover:text-green-500 rounded-md px-3 py-2">
-            + Add new device
-        </RouterLink>
-    </div>
 </template>
 
 <script setup lang="ts">
@@ -74,7 +67,7 @@ const filteredItems = computed(() => {
 
 onMounted(async () => {
     await axios.get<ResponseData[]>('api/objects').then(response => {
-        state.devices = response.data.map(item => ({
+        state.devices = response.data.map((item) => ({
             id: item.id,
             name: item.name,
             data: {
@@ -102,10 +95,16 @@ onMounted(async () => {
 });
 
 const deleteItem = async (id: string) => {
-    await axios.delete(`api/objects/${id}`).then(() => {
+    await axios.delete(`api/objects/${id}`).then((response) => {
+        if (response.status !== 200) {
+            toast.error(response.error)
+            return;
+        }
         const items = state.devices;
         state.devices = items.filter(device => device.id !== id);
         toast.success('Item is deleted successfully!');
+    }).catch((error) => {
+        toast.error('Something went wrong. Please try again!')
     })
 }
 
