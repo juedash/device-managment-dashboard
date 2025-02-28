@@ -2,8 +2,8 @@ import "./assets/main.css";
 import "primeicons/primeicons.css";
 import "vue3-toastify/dist/index.css";
 
-import { createPinia } from "pinia";
 import { createApp } from "vue";
+import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
