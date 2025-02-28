@@ -26,9 +26,13 @@ import type { DeviceItem } from '@/types/main';
 import axios from 'axios';
 import CardView from './CardView.vue';
 import ListView from './ListView.vue';
+import { useDevicesStore } from '@/stores/customDevicesStore';
 
 const selectedView = ref('card');
 const devices = ref();
+
+const devicesStore = useDevicesStore();
+const customDevices = devicesStore.getCustomDevices;
 
 onMounted(async () => {
     axios.get<DeviceItem[]>('https://api.restful-api.dev/objects')  // Specify the type here
@@ -39,6 +43,12 @@ onMounted(async () => {
         .catch(error => {
             console.error(error);
         });
+    console.log(customDevices)
+    for (const id of customDevices) {
+        axios.get(`https://api.restful-api.dev/objects/${id}`).then(response => {
+            devices.value.push(response.data)
+        })
+    }
 });
 </script>
 
