@@ -6,8 +6,9 @@ export const useDevicesStore = defineStore("devices", {
   }),
 
   actions: {
-    addDevice(device: any) {
-      console.log(this.customDevices);
+    addDevice(device: string) {
+      this.customDevices.push(device);
+      console.log("Updated customDevices:", this.customDevices);
     },
   },
 

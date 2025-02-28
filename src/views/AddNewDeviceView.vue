@@ -2,6 +2,7 @@
     <div>
         <section class="bg-gray-100 h-screen">
             <div class="container m-auto max-w-2xl py-24">
+                <BackButton />
                 <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
                     <form @submit.prevent="handleSubmit">
                         <h2 class="text-3xl text-center font-semibold mb-6">Add a new device</h2>
@@ -39,11 +40,11 @@
                                 <select id="salary" name="salary" v-model="form.storageUnit"
                                     class="border rounded w-full py-2 px-3 mb-2 bg-white pr-2" required>
                                     <option disabled selected value> -- select storage unit -- </option>
-                                    <option value="mb">B</option>
-                                    <option value="mb">KB</option>
-                                    <option value="mb">MB</option>
-                                    <option value="mb">GB</option>
-                                    <option value="mb">TB</option>
+                                    <option value="B">B</option>
+                                    <option value="KB">KB</option>
+                                    <option value="MB">MB</option>
+                                    <option value="GB">GB</option>
+                                    <option value="TB">TB</option>
                                 </select>
                             </div>
 
@@ -69,6 +70,8 @@ import type { DeviceItem } from '@/types/main';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { useDevicesStore } from '@/stores/customDevicesStore';
+import BackButton from '@/components/BackButton.vue';
+import { toast } from 'vue3-toastify';
 
 const router = useRouter();
 const devicesStore = useDevicesStore();
@@ -92,18 +95,32 @@ const handleSubmit = () => {
             capacity,
             ...rest
         }
-    }
+    };
 
-    axios.post('https://api.restful-api.dev/objects',
-        formData).then(response => {
-            console.log('Response:', response);
-            console.log("response.data.id", response.data.id)
+    // axios.post('https://api.restful-api.dev/objects', formData)
+    //     .then(response => {
+    //         console.log('Response:', response);
+    //         console.log("response.data.id", response.data.id);
+    //         devicesStore.addDevice(response.data.id);
+    //         router.push('/');
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     });
+
+
+    axios.post('api/objects', formData)
+        .then(response => {
             devicesStore.addDevice(response.data.id);
-            router.push('/');
-        }).catch(error => {
+            toast.success('Device was added successsfully');
+            setTimeout(() => {
+                router.push('/');
+            }, 3500)
+        })
+        .catch(error => {
             console.error('Error:', error);
         });
-}
+};
 </script>
 
 <style scoped></style>

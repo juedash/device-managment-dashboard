@@ -23,8 +23,15 @@
                     <td class="p-3">{{ device?.data?.capacity }}</td>
 
                     <td class="p-3 flex gap-1">
-                        <button class="px-3 py-1 text-white bg-red-500 rounded-lg">Delete</button>
-                        <button class="px-3 py-1 text-white bg-green-500 rounded-lg">Edit</button>
+                        <div class="flex gap-2 self-end">
+                            <RouterLink :to="`/edit/${device.id}`" class=" bg-green-500 hover:bg-green-600 text-white text-center font-bold py-1.5 text-sm px-4 rounded-md
+                focus:outline-none focus:shadow-outline mt-4 block">
+                                Edit</RouterLink>
+                            <button @click="emit('deleteItem', device.id)"
+                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline  py-1.5 text-sm  mt-4 block">
+                                Delete
+                            </button>
+                        </div>
 
                     </td>
                 </tr>
@@ -44,6 +51,8 @@ const props = defineProps({
         type: Array as PropType<DeviceItem[]>,
     }
 })
+
+const emit = defineEmits(['deleteItem'])
 </script>
 
 <style scoped></style>
