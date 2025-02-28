@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import ListView from './views/ListView.vue';
+import NavBar from './components/NavBar.vue';
+import HomeView from './views/HomeView.vue';
 
 </script>
 
 <template>
-  <ListView />
+  <NavBar />
+  <RouterView />
 </template>
