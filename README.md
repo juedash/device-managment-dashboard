@@ -1,4 +1,10 @@
-## Project Setup - Node Module install
+# device-managment-dashboard
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vite.dev/config/).
+
+## Project Setup
 
 ```sh
 npm install
@@ -6,18 +12,17 @@ npm install
 
 ### Compile and Hot-Reload for Development
 
-````sh
-npm run dev
-local url: http://localhost:3000
+```sh
+npm run dev //goto http://localhost:3000/
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
 npm run build
-````
+```
 
-### Run Unit Tests with [Vitest]
+### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
 npm run test:unit
