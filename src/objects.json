@@ -32,8 +32,10 @@
       "id": "6",
       "name": "Apple AirPods",
       "data": {
-        "generation": "3rd",
-        "price": 120
+        "price": 120,
+        "category": "dsgfg",
+        "color": "sdd",
+        "capacity": "123 MB"
       }
     },
     {

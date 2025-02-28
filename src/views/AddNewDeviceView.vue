@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="bg-gray-100 h-screen">
-            <div class="container m-auto max-w-2xl py-24">
+            <div class="container m-auto max-w-2xl py-6">
                 <BackButton />
                 <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
                     <form @submit.prevent="handleSubmit">
@@ -85,6 +85,10 @@ const form = ref({
 });
 
 const handleSubmit = () => {
+    if (isNaN(Number(state.form.price))) {
+        toast.warning('Enter only numbers in the price field');
+        return;
+    }
     const { name, storageSize, storageUnit, ...rest } = form.value;
     const capacity = `${storageSize} ${storageUnit}`;
     const formData = {

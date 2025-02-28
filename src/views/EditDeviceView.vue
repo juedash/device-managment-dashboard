@@ -1,6 +1,6 @@
 <template>
     <section class="bg-gray-100 h-screen">
-        <div class="container m-auto max-w-2xl py-24">
+        <div class="container m-auto max-w-2xl py-">
             <BackButton />
             <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
                 <div v-if="state.isLoading">
@@ -20,7 +20,6 @@
                         <input type="text" v-model="state.form.price" id="price" name="price" class="input-field"
                             placeholder="eg. 99.99" required />
                     </div>
-
                     <div class="mb-4">
                         <label class="block text-gray-700 font-bold mb-2">Category</label>
                         <input type="text" v-model="state.form.category" id="category" name="category"
